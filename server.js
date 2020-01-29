@@ -1,11 +1,13 @@
 const net = require("net")
+const { PORT } = require("./utils")
 
 const server = net.createServer(socket => {
-  console.log(socket)
   socket.write("I hear you!\n")
   socket.pipe(socket)
+  socket.on("close", () => {
+    console.log("client left the building")
+  })
   // socket.end()
 })
 
-const PORT = 3030
 server.listen(PORT)
