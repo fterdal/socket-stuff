@@ -8,7 +8,11 @@ const client = new net.Socket()
 // })
 
 // const PORT = 8080
-client.connect(PORT, "localhost", (err, conn) => {
-  console.log("Connected to port:", PORT)
+const socket = client.connect(PORT, "localhost", () => {
+  console.log("💻 Connected to port:", PORT)
   client.write("Hey server, what's up?")
+})
+socket.on("data", data => {
+  console.log("💻 Data from server:", data.toString())
+  console.log("💻 Data from server:", data.toString())
 })
