@@ -1,18 +1,19 @@
 const net = require("net")
 const { PORT } = require("./utils")
 
-const client = new net.Socket()
-
-// client.connect({ port: PORT }, () => {
-//   console.log("connecting")
-// })
+const socket = new net.Socket()
 
 // const PORT = 8080
-const socket = client.connect(PORT, "localhost", () => {
+const client = socket.connect(PORT, "localhost", () => {
   console.log("💻 Connected to port:", PORT)
-  client.write("Hey server, what's up?")
+  socket.write("Hey server, what's up?")
 })
-socket.on("data", data => {
+client.on("data", data => {
   console.log("💻 Data from server:", data.toString())
-  console.log("💻 Data from server:", data.toString())
+})
+client.on("error", error => {
+  console.log("💻 Error on Client:", error)
+})
+client.on("close", () => {
+  console.log("💻 Connection closed")
 })
