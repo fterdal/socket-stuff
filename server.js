@@ -1,7 +1,7 @@
 const net = require("net")
 
 const server = net.createServer(socket => {
-  console.log("new request!")
+  console.log(socket)
   socket.write("I hear you!\n")
   socket.pipe(socket)
   // socket.end()
